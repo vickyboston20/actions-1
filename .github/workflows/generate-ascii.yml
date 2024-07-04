@@ -7,14 +7,10 @@ jobs:
         steps:
             - name: Checkout Repo
               uses: actions/checkout@v4
-            - name: Install Cowsay Program
-              run: sudo apt install cowsay -y
-            - name: Execute Cowsay CMD
-              run: cowsay -f dragon "Hi there im Dragon. ahha!" >> dragon.txt
             - name: List files
               run: ls -ltra
-            - name: Test File Exists
-              run: grep -i "dragon" dragon.txt
-            - name: Display the Content
-              run: cat dragon.txt
+            - name: Execute shell Script
+              run: |
+                chmod +x ascii-script.sh
+                ./ascii-script.sh
     
