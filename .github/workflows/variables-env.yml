@@ -13,6 +13,7 @@ jobs:
             - name: Build Image
               run: echo "docker build -t ${{ env.DOCKER_REGISTRY}}/$DOCKER_USERNAME/$DOCKER_IMAGE:latest"
     Docker_Push:
+        needs: Docker_Build
         runs-on: ubuntu-latest
         steps: 
             - name: Docker Login
