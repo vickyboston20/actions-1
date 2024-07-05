@@ -18,6 +18,7 @@ jobs:
                 path: dragon.txt
     
     Test_Job_1:
+        needs: Build_Job_1
         runs-on: ubuntu-latest
         steps:
             - name: Download Artifact
@@ -29,6 +30,7 @@ jobs:
               run: grep -i "dragon" dragon.txt
 
     Deploy_Job_1:
+        needs: Test_Job_1
         runs-on: ubuntu-latest
         steps:
             - name: Download Artifact
