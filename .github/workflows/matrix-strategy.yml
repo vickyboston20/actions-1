@@ -1,0 +1,25 @@
+name: Matrix Strategy
+on:
+    push:
+    workflow_dispatch: 
+
+jobs:
+    Deploy:
+        strategy:
+          fail-fast: false
+          max-parallel: 2
+          matrix:
+            os: [ubuntu-latest, windows-latest, macos-latest]
+            images: [hello-world, alpine]
+            exclude:
+              - os: [windows-latest]
+                images: [alpine]
+            include:
+              - os: [windows-latest]
+                images: [busybox]
+        runs-on: ${{ matrix.os }}
+        steps:
+            - name: Docker Details
+              run: docker info
+            - name: Run Image on ${{ matrix.os }}
+              run: docker run ${{ matrix.images }}
