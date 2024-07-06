@@ -1,7 +1,8 @@
-name: Variable Env
+name: Event Trigger
 on: 
-  schedule:
-    - cron: "*/1 * * * *"
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "*/1 * * * *"
 
 env:
     DOCKER_REGISTRY: docker.io
