@@ -27,3 +27,5 @@ jobs:
         run: echo "docker login -u ${{ vars.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}"
       - name: Docker Push
         run: echo "docker push $DOCKER_REGISTRY/${{ vars.DOCKER_USERNAME }}/$DOCKER_IMAGE:latest"
+      - name: Delay Seconds
+        run: 600s
