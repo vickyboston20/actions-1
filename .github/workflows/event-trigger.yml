@@ -5,22 +5,25 @@ on:
   #   - cron: "*/1 * * * *"
 
 env:
-    DOCKER_REGISTRY: docker.io
-    DOCKER_IMAGE: nginx
+  DOCKER_REGISTRY: docker.io
+  DOCKER_IMAGE: nginx
 
 jobs:
-    Docker_Build:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Build Image
-              run: echo "docker build -t ${{ env.DOCKER_REGISTRY}}/${{ vars.DOCKER_USERNAME }}/$DOCKER_IMAGE:latest"
-    Docker_Push:
-        needs: Docker_Build
-        runs-on: ubuntu-latest
-        steps: 
-            - name: Docker Login
-            #   env:
-            #     DOCKER_PASSWORD: SecurePassword
-              run: echo "docker login -u ${{ vars.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}"
-            - name: Docker Push
-              run: echo "docker push $DOCKER_REGISTRY/${{ vars.DOCKER_USERNAME }}/$DOCKER_IMAGE:latest"
+  Docker_Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Image
+        run: echo "docker build -t ${{ env.DOCKER_REGISTRY}}/${{ vars.DOCKER_USERNAME }}/$DOCKER_IMAGE:latest"
+  Docker_Push:
+    concurrency: 
+      group: Production Deployment
+      cancel-in-progress: true
+    needs: Docker_Build
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Docker Login
+      #   env:
+      #     DOCKER_PASSWORD: SecurePassword
+        run: echo "docker login -u ${{ vars.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}"
+      - name: Docker Push
+        run: echo "docker push $DOCKER_REGISTRY/${{ vars.DOCKER_USERNAME }}/$DOCKER_IMAGE:latest"
