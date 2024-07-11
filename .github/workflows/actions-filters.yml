@@ -21,7 +21,7 @@ on:
             - main
         
 jobs:
-    Hello_world:
+    Event_Name:
         runs-on: ubuntu-latest
         steps:
             - name: Display Event 
