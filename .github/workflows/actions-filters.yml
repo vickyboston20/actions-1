@@ -5,12 +5,12 @@ on:
     schedule:
         - cron: "* * * * *"
     push:
-        branches:
-            - main
-            - '!feature/*'
-        # branches-ignore: 
-        #     - feature/*
-        #     - test/*
+        # branches:
+        #     - main
+        #     - '!feature/*'
+        branches-ignore: 
+            - feature/*
+            - test/*
     pull_request:
         types: 
             - opened
