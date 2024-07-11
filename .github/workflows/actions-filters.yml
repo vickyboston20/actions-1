@@ -1,0 +1,28 @@
+name: Actions and Filters
+
+on:
+    workflow_dispatch:
+    schedule:
+        - cron: "* * * * *"
+    push:
+        branches:
+            - main
+            - '!feature/*'
+        # branches-ignore: 
+        #     - feature/*
+        #     - test/*
+    pull_request:
+        types: 
+            - opened
+            - closed
+        paths-ignore:
+            - README.md
+        branches:
+            - main
+        
+jobs:
+    Hello_world:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Display Event 
+              run: echo "this workflow executed by event - ${{ github.event_name }}"
